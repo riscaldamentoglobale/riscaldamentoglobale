@@ -1,49 +1,50 @@
-/* --- VARIABILI E RESET (High Contrast Setup) --- */
+/* --- VARIABILI E FONT (Minimal/Clean Look) --- */
 :root {
-    --color-primary-blue: #00bcd4;     /* Azzurro Ciano (Neon) */
-    --color-secondary-green: #4caf50;  /* Verde Acido */
-    --color-background-deep: #0a0a0a;  /* Nero Profondo */
-    --color-text-light: #f1f1f1;       /* Testo Bianco */
-    --color-accent-dark: #1e1e1e;      /* Sfondo Card leggermente più chiaro */
+    --color-main: #000000;             /* Nero Puro */
+    --color-text: #F1F1F1;             /* Bianco Leggero */
+    --color-accent-blue: #00bcd4;      /* Azzurro Ciano (Accent) */
+    --color-accent-green: #4caf50;     /* Verde (Accent) */
+    --color-separator: #222222;        /* Linee di divisione sottili */
 }
 
 * {
     box-sizing: border-box;
+    transition: all 0.3s ease-out; /* Tutte le transizioni sono fluide */
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-    color: var(--color-text-light);
-    background-color: var(--color-background-deep);
+    color: var(--color-text);
+    background-color: var(--color-main);
     line-height: 1.6;
-    overflow-x: hidden; /* Evita scroll orizzontale */
+    overflow-x: hidden;
 }
 
-/* --- HEADER (Stile minimalista e definito) --- */
+/* --- HEADER e NAVIGAZIONE --- */
 header {
-    background-color: rgba(0, 0, 0, 0.9); /* Leggera trasparenza */
-    padding: 15px 5%;
+    background-color: var(--color-main);
+    padding: 18px 5%;
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 2px solid var(--color-primary-blue);
+    border-bottom: 1px solid var(--color-separator);
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1400px;
+    max-width: 1300px;
     margin: 0 auto;
 }
 
 .logo {
-    font-size: 1.6em;
-    font-weight: 900;
-    color: var(--color-secondary-green);
-    letter-spacing: 2px;
+    font-size: 1.2em;
+    font-weight: 700;
+    color: var(--color-accent-blue);
+    letter-spacing: 1px;
 }
 
 nav ul {
@@ -52,235 +53,234 @@ nav ul {
 }
 
 nav ul li a {
-    color: var(--color-text-light);
+    color: var(--color-text);
     text-decoration: none;
-    padding: 10px 18px;
-    transition: color 0.3s, background-color 0.3s;
-    font-weight: 700;
-    position: relative;
+    padding: 10px 15px;
+    font-weight: 500;
+    opacity: 0.8;
 }
 
 nav ul li a:hover {
-    color: var(--color-primary-blue);
-}
-/* Linea animata al passaggio del mouse sotto il link */
-nav ul li a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 3px;
-    background-color: var(--color-primary-blue);
-    transition: width 0.3s ease-out, left 0.3s ease-out;
-}
-nav ul li a:hover::after {
-    width: 100%;
-    left: 0;
+    color: var(--color-accent-green);
+    opacity: 1;
 }
 
-/* --- SEZIONE HERO (L'effetto WOW) --- */
+/* --- SEZIONE HERO (Minimalismo e Focus) --- */
 .hero-section {
     position: relative;
-    height: 95vh;
+    height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     overflow: hidden;
-    background: radial-gradient(circle at center, #111111 0%, var(--color-background-deep) 100%);
-    border-bottom: 5px solid var(--color-secondary-green);
+    background: var(--color-main);
 }
 
 .hero-content {
     position: relative;
     z-index: 10;
-    padding: 20px;
     max-width: 900px;
+    padding: 0 5%;
+}
+
+.pre-title {
+    color: var(--color-accent-green);
+    font-size: 0.9em;
+    letter-spacing: 3px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: 0.7;
 }
 
 .hero-content h1 {
-    font-size: 7em; /* Titolo gigante */
+    font-size: 4.5em; /* Più contenuto del precedente */
     font-weight: 900;
-    margin: 0.05em 0;
-    /* Effetto Neon Blue */
-    color: white; 
-    text-shadow: 
-        0 0 10px var(--color-primary-blue),
-        0 0 20px var(--color-primary-blue),
-        0 0 40px var(--color-primary-blue);
-    letter-spacing: -1px;
-    line-height: 1;
+    margin: 0 0 10px 0;
+    color: var(--color-text);
+    line-height: 1.1;
+}
+/* Colore diverso per l'accento */
+.hero-content h1 strong, .hero-content h1 b {
+    color: var(--color-accent-blue);
 }
 
-.hero-content p {
-    font-size: 1.4em;
+.description {
+    font-size: 1.1em;
+    color: #888;
+    margin-bottom: 40px;
     font-weight: 300;
-    color: #cccccc;
-    margin-top: 10px;
 }
 
 .cta-button {
-    /* Stile Button: Aggressivo e Visibile */
     display: inline-block;
-    background: linear-gradient(45deg, var(--color-secondary-green), #81c784);
-    color: var(--color-background-deep);
-    padding: 15px 35px;
+    background-color: var(--color-accent-green);
+    color: var(--color-main);
+    padding: 12px 30px;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 4px;
     font-weight: 700;
     text-transform: uppercase;
-    transition: transform 0.3s, box-shadow 0.3s;
-    border: none;
-    box-shadow: 0 0 15px var(--color-secondary-green);
-    margin-top: 30px;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
 }
 
 .cta-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px var(--color-secondary-green);
+    background-color: #66bb6a;
+    transform: translateY(-2px);
 }
 
-/* --- GLOBO CHE GIRA (Potenziato e Sfondo) --- */
+/* --- GLOBO (Elemento Visivo Minimalista) --- */
 .spinning-globe {
     position: absolute;
-    width: 1000px; /* Molto grande */
-    height: 1000px;
-    background: transparent; /* Nascondiamo il background originale */
+    width: 600px;
+    height: 600px;
     border-radius: 50%;
-    opacity: 0.1; 
+    opacity: 0.05; /* Molto sottile */
     z-index: 5;
-    animation: spin 90s linear infinite; /* Animazione più lenta ed epica */
-}
-
-/* Creo l'illusione del globo ruotante usando un pseudo-elemento con la mappa */
-.spinning-globe::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
     background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e3/Worldmap-min.svg');
-    background-size: 200%; /* Ingandisco la mappa */
+    background-size: 150%; 
     background-repeat: repeat-x;
-    opacity: 0.5;
-    /* Colore che si fonde con il tema */
-    background-color: var(--color-primary-blue);
-    background-blend-mode: color-burn; 
-    
-    /* Effetto alone (Glow) */
-    box-shadow: 0 0 100px 50px rgba(0, 188, 212, 0.2); 
+    background-color: var(--color-accent-blue);
+    background-blend-mode: luminosity; /* Rende la mappa quasi monocromatica */
+    border: 1px solid var(--color-separator);
+    animation: spin 90s linear infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 @keyframes spin {
     from {
-        /* Sposto l'immagine del background per l'effetto rotazione */
         background-position: 0% 0;
-        transform: rotate(0deg);
     }
     to {
         background-position: 100% 0;
-        transform: rotate(360deg);
     }
 }
 
 
-/* --- SEZIONI DI CONTENUTO (Layout a Griglia) --- */
+/* --- SEZIONI DI CONTENUTO (Clean Layout) --- */
 main {
-    max-width: 1400px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 5%;
 }
 
 .content-section {
-    padding: 100px 0;
-    border-bottom: 1px dashed var(--color-accent-dark);
+    padding: 120px 0;
+    border-bottom: 1px solid var(--color-separator);
+}
+
+.content-section:last-child {
+    border-bottom: none;
 }
 
 .content-section h2 {
-    font-size: 3em;
-    color: var(--color-secondary-green);
+    font-size: 2.5em;
+    color: var(--color-text);
     margin-bottom: 50px;
-    text-transform: uppercase;
     font-weight: 900;
-    position: relative;
-}
-/* Aggiunge una linea decorativa sotto il titolo */
-.content-section h2::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 80px;
-    height: 4px;
-    background-color: var(--color-primary-blue);
-    border-radius: 2px;
+    letter-spacing: 0.5px;
+    border-left: 5px solid var(--color-accent-blue);
+    padding-left: 15px;
 }
 
-/* Griglia per le Card */
+.text-block {
+    max-width: 700px;
+}
+.text-block h3 {
+    color: var(--color-accent-green);
+    font-size: 1.4em;
+    font-weight: 700;
+    margin-top: 0;
+}
+.text-block p, .text-block ul {
+    color: #b0b0b0;
+    font-weight: 300;
+}
+.text-block ul {
+    list-style: none;
+    padding-left: 0;
+}
+.text-block ul li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 20px;
+}
+.text-block ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent-blue);
+    font-weight: 900;
+}
+
+
+/* CARD (Stile Clean e Hover Elegante) */
 .card-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Layout responsivo */
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
 }
 
 .card {
-    background-color: var(--color-accent-dark);
-    border-radius: 10px;
-    border: 1px solid var(--color-background-deep);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background-color: #0d0d0d;
+    border: 1px solid var(--color-separator);
+    border-radius: 8px;
     padding: 30px;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+    text-align: left;
+    transition: border-color 0.3s, background-color 0.3s;
 }
 
-/* Effetto Bordo Glitch all'hover */
 .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 0 25px rgba(0, 188, 212, 0.6); /* Ombra Blu Intensa */
-    border-color: var(--color-primary-blue);
+    border-color: var(--color-accent-green);
+    background-color: #1a1a1a;
+    transform: translateY(-5px);
 }
 
 .card .material-icons {
-    font-size: 4em;
-    color: var(--color-secondary-green);
-    margin-bottom: 10px;
-    text-shadow: 0 0 10px rgba(67, 160, 71, 0.8);
+    font-size: 2.5em;
+    color: var(--color-accent-green);
+    margin-bottom: 15px;
 }
 
 .card h3 {
-    color: var(--color-primary-blue);
+    color: var(--color-text);
     font-weight: 700;
-    text-transform: uppercase;
+    margin-top: 0;
 }
 .card p {
-    color: #bdbdbd;
+    color: #999;
 }
 
-/* Stile specifico per le Riflessioni */
+/* Riflessioni e Footer */
 .reflection-box {
-    background-color: var(--color-accent-dark);
     padding: 40px;
-    border-left: 5px solid var(--color-primary-blue);
-    border-radius: 5px;
-    box-shadow: 0 0 15px rgba(0, 188, 212, 0.2);
+    border: 1px solid var(--color-accent-blue);
+    border-radius: 4px;
+    background-color: #0d0d0d;
 }
 .reflection-box p {
     font-style: italic;
     color: #e0e0e0;
     font-size: 1.1em;
 }
-/* --- FOOTER --- */
+.signature {
+    font-style: normal !important;
+    margin-top: 20px;
+    border-top: 1px solid var(--color-separator);
+    padding-top: 10px;
+    color: var(--color-accent-green) !important;
+}
+
 footer {
-    background-color: #000;
-    color: #666;
+    background-color: var(--color-main);
+    color: #444;
     text-align: center;
     padding: 30px 0;
     margin-top: 50px;
-    font-size: 0.9em;
-    border-top: 1px solid var(--color-accent-dark);
+    font-size: 0.8em;
+    border-top: 1px solid var(--color-separator);
 }
