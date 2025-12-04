@@ -1,18 +1,18 @@
-/* --- VARIABILI E FONT (Cyberpunk/Glitch Look) --- */
+/* --- VARIABILI E FONT (Ultra-Minimal Style) --- */
 :root {
     --color-main: #000000;             /* Nero Puro */
-    --color-text: #F1F1F1;             /* Bianco Leggero */
-    --color-accent-blue: #00e5ff;      /* Azzurro Neon Forte */
-    --color-accent-green: #64ffda;     /* Verde Ciano Neon Forte */
-    --color-separator: #222;           /* Linee di divisione */
-    --font-stack: 'Rajdhani', sans-serif;
+    --color-text: #F0F0F0;             /* Bianco Leggero */
+    --color-accent-blue: #00c7e5;      /* Azzurro Stabile */
+    --color-accent-green: #69f0ae;     /* Verde Acquamarina Stabile */
+    --color-separator: #1a1a1a;        /* Linee di divisione */
+    --font-stack: 'Inter', sans-serif;
 }
 
 /* Base e Reset */
 * {
     box-sizing: border-box;
-    /* Transizione rapida per effetti di hover bruschi */
-    transition: all 0.15s ease-out; 
+    /* Transizione universale per un look fluido */
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
 }
 
 body {
@@ -23,227 +23,216 @@ body {
     background-color: var(--color-main);
     line-height: 1.6;
     overflow-x: hidden;
-    /* Filtro per un leggero effetto tremolante su tutto */
-    filter: brightness(1) contrast(1);
-    animation: background-pulse 40s linear infinite; /* Animazione lenta dello sfondo */
 }
-
-/* --- EFFETTO BACKGROUND GRANULOSO/RUMORE --- */
-#grain-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 999; /* Alto ma sotto gli elementi */
-    pointer-events: none;
-    opacity: 0.05; /* Molto sottile */
-    /* Immagine pattern per il rumore (usiamo un gradiente ripetuto per simularlo) */
-    background-image: repeating-linear-gradient(
-        45deg, 
-        rgba(0,0,0,.5), 
-        rgba(0,0,0,.5) 1px, 
-        transparent 1px, 
-        transparent 2px
-    );
-    animation: grain-animation 0.5s steps(1) infinite;
-}
-
-@keyframes grain-animation {
-    0%, 100% { transform: translate(0, 0) }
-    10% { transform: translate(-1px, 1px) }
-    20% { transform: translate(-2px, 0) }
-    30% { transform: translate(1px, -1px) }
-    40% { transform: translate(0, 2px) }
-    50% { transform: translate(-1px, -2px) }
-    60% { transform: translate(-2px, 1px) }
-    70% { transform: translate(2px, 0) }
-    80% { transform: translate(-1px, 1px) }
-    90% { transform: translate(0, -1px) }
-}
-/* Animazione sfondo lenta (cambia leggermente la tinta) */
-@keyframes background-pulse {
-    0% { background-color: var(--color-main); }
-    50% { background-color: #030303; }
-    100% { background-color: var(--color-main); }
-}
-
 
 /* --- HEADER e NAVIGAZIONE --- */
 header {
-    background-color: rgba(0, 0, 0, 0.95);
-    padding: 15px 5%;
+    background-color: var(--color-main);
+    padding: 20px 5%;
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 2px dashed var(--color-accent-blue);
-    box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
 .logo {
-    font-size: 1.8em;
-    font-weight: 700;
-    color: var(--color-accent-green);
-    letter-spacing: 3px;
-    /* Ombra neon */
-    text-shadow: 0 0 5px var(--color-accent-green); 
+    font-size: 1.5em;
+    font-weight: 900;
+    color: var(--color-text);
 }
 
 nav ul li a {
     color: var(--color-text);
-    padding: 10px 15px;
-    font-weight: 600;
-    border: 1px solid transparent;
+    padding: 8px 15px;
+    font-weight: 500;
+    opacity: 0.7;
+    position: relative;
+    /* Linea sottile per l'hover */
 }
+
 nav ul li a:hover {
     color: var(--color-accent-blue);
-    border: 1px solid var(--color-accent-blue);
-    box-shadow: 0 0 5px var(--color-accent-blue);
-    transform: skewX(-5deg); /* Effetto obliquo all'hover */
+    opacity: 1;
+}
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    width: 0;
+    height: 1px;
+    background-color: var(--color-accent-blue);
+    transition: width 0.3s ease-out;
+}
+nav ul li a:hover::after {
+    width: calc(100% - 30px);
 }
 
-
-/* --- SEZIONE HERO (Il Glitch VERO) --- */
+/* --- SEZIONE HERO (Focalizzata) --- */
 .hero-section {
     position: relative;
-    height: 90vh;
-    border-bottom: 5px double var(--color-accent-green);
+    height: 85vh;
+    display: flex;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 5%;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-separator);
 }
 
 .hero-content {
+    /* Il contenuto occupa la maggior parte dello spazio */
+    max-width: 600px; 
     z-index: 10;
 }
 
 .pre-title {
-    color: var(--color-accent-blue);
-    font-size: 1.1em;
-    letter-spacing: 5px;
-    /* Animazione Glitch sul testo pre-title */
-    animation: text-glitch 2s infinite alternate; 
-    position: relative;
+    color: var(--color-accent-green);
+    font-size: 0.8em;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: 500;
 }
-.pre-title::before, .pre-title::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-.pre-title::before {
-    left: 2px;
-    text-shadow: -2px 0 var(--color-accent-green);
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim-1 2s infinite alternate-reverse;
-}
-.pre-title::after {
-    left: -2px;
-    text-shadow: -2px 0 var(--color-accent-blue);
-    clip: rect(8px, 450px, 30px, 0);
-    animation: glitch-anim-2 2s infinite alternate-reverse;
-}
-
-@keyframes glitch-anim-1 {
-    0% { clip: rect(24px, 9999px, 83px, 0) }
-    15% { clip: rect(65px, 9999px, 80px, 0) }
-    30% { clip: rect(98px, 9999px, 37px, 0) }
-    45% { clip: rect(31px, 9999px, 14px, 0) }
-    60% { clip: rect(10px, 9999px, 53px, 0) }
-    75% { clip: rect(74px, 9999px, 46px, 0) }
-    90% { clip: rect(51px, 9999px, 95px, 0) }
-}
-@keyframes glitch-anim-2 {
-    0% { clip: rect(13px, 9999px, 20px, 0) }
-    15% { clip: rect(47px, 9999px, 29px, 0) }
-    30% { clip: rect(78px, 9999px, 63px, 0) }
-    45% { clip: rect(87px, 9999px, 71px, 0) }
-    60% { clip: rect(92px, 9999px, 99px, 0) }
-    75% { clip: rect(30px, 9999px, 8px, 0) }
-    90% { clip: rect(1px, 9999px, 40px, 0) }
-}
-
 
 .hero-content h1 {
-    font-size: 8em;
+    font-size: 4em;
     font-weight: 900;
-    text-shadow: 0 0 15px var(--color-accent-blue);
-    letter-spacing: 5px;
-    /* Testo che vibra leggermente */
-    animation: shake 0.5s infinite; 
+    margin: 0 0 20px 0;
+    line-height: 1.1;
 }
-@keyframes shake {
-    0%, 100% { transform: translate(0.5px, 0); }
-    50% { transform: translate(-0.5px, 0); }
+.hero-content h1 strong {
+    color: var(--color-accent-blue);
 }
 
 .description {
-    color: var(--color-accent-green);
-    font-style: italic;
+    font-size: 1.1em;
+    color: #888;
+    margin-bottom: 40px;
+    font-weight: 300;
 }
 
 .cta-button {
-    background-color: var(--color-accent-green);
-    color: var(--color-main);
-    border: 3px solid var(--color-accent-green);
-    box-shadow: 0 0 20px var(--color-accent-green);
-    padding: 15px 40px;
-    font-weight: 700;
+    display: inline-block;
+    background-color: transparent;
+    color: var(--color-accent-green);
+    padding: 12px 30px;
+    border: 1px solid var(--color-accent-green);
+    border-radius: 4px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .cta-button:hover {
-    background-color: var(--color-main);
-    color: var(--color-accent-green);
-    transform: scale(1.05) rotateZ(1deg); /* Più aggressivo */
-    box-shadow: 0 0 30px var(--color-accent-blue);
+    background-color: var(--color-accent-green);
+    color: var(--color-main);
+    transform: translateY(-2px);
 }
 
-/* --- GLOBO (Aura Animata) --- */
-.spinning-globe {
-    width: 700px;
-    height: 700px;
+/* --- GLOBO (Dettaglio laterale) --- */
+.hero-visual {
+    position: absolute;
+    right: -5%; /* Posizionato a destra, fuori dal flusso */
+    top: 50%;
+    transform: translateY(-50%);
     opacity: 0.1;
+    z-index: 5;
+}
+
+.globe-element {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
     background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e3/Worldmap-min.svg');
     background-size: 150%; 
+    background-repeat: repeat-x;
     background-color: var(--color-accent-blue);
-    background-blend-mode: color-dodge; /* Fusione che crea luci forti */
-    
-    /* Aura pulsante e rotante */
-    box-shadow: 0 0 100px 50px rgba(0, 229, 255, 0.4), 
-                0 0 20px 5px var(--color-accent-green);
-    animation: spin 60s linear infinite, glow 3s alternate infinite;
+    background-blend-mode: color-dodge;
+    border: 1px solid var(--color-separator);
+    animation: spin 60s linear infinite; 
 }
 
-@keyframes glow {
-    0% { box-shadow: 0 0 80px 40px rgba(0, 229, 255, 0.4), 0 0 20px 5px var(--color-accent-green); }
-    100% { box-shadow: 0 0 120px 60px rgba(100, 255, 218, 0.5), 0 0 30px 10px var(--color-accent-blue); }
-}
 @keyframes spin {
     from { background-position: 0% 0; }
     to { background-position: 100% 0; }
 }
 
-
 /* --- SEZIONI DI CONTENUTO --- */
 main {
-    max-width: 1100px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 5%;
 }
 
 .content-section {
     padding: 100px 0;
-    border-bottom: 1px dashed var(--color-separator);
+    border-bottom: 1px solid var(--color-separator);
 }
 
 .content-section h2 {
-    font-size: 2.8em;
-    color: var(--color-accent-green);
+    font-size: 2.2em;
+    color: var(--color-text);
     font-weight: 700;
-    text-shadow: 0 0 5px var(--color-accent-green);
-    border-left: 5px solid var(--color-accent-blue);
-    padding-left: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
+    padding-left: 0;
+    border-left: none;
+    position: relative;
+}
+.content-section h2::after {
+    /* Linea decorativa sotto il titolo, tipica dei portfolio minimali */
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background-color: var(--color-accent-green);
 }
 
-/* CARD (Glitchy Hover) */
+/* Stile per i blocchi di testo e le liste */
+.text-block p {
+    color: #b0b0b0;
+    font-size: 1.05em;
+    max-width: 700px;
+}
+.text-block ul {
+    list-style: none;
+    padding-left: 0;
+    max-width: 700px;
+}
+.text-block ul li {
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 30px;
+    color: #ccc;
+    font-weight: 500;
+}
+.text-block ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent-blue);
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+
+/* CARD LAYOUT (Uso Grid) */
+.card-layout {
+    /* Allinea il titolo a sinistra */
+    padding-left: 0;
+    padding-right: 0;
+}
 .card-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -251,68 +240,56 @@ main {
 }
 
 .card {
-    background-color: #111111;
+    background-color: var(--color-main);
     border: 1px solid var(--color-separator);
-    border-radius: 2px; /* Bordi appuntiti */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 4px; 
     padding: 30px;
     text-align: left;
-    position: relative;
-    overflow: hidden;
+    /* Ombra subtile all'inizio */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
 }
 
 .card:hover {
-    border-color: var(--color-accent-blue);
-    box-shadow: 0 0 15px var(--color-accent-blue);
-    transform: skewX(1deg) scale(1.02); /* Effetto Glitch/Shift */
-}
-
-/* Testo hover che appare in basso a destra */
-.card::after {
-    content: attr(data-hover-text);
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    font-size: 0.8em;
-    color: var(--color-accent-blue);
-    opacity: 0;
-    transition: opacity 0.1s, transform 0.1s;
-    text-shadow: 1px 1px #000;
-}
-.card:hover::after {
-    opacity: 1;
-    transform: translate(-2px, -2px);
+    border-color: var(--color-accent-green);
+    /* Nessun movimento, solo cambiamento di colore e ombra */
+    box-shadow: 0 6px 15px rgba(105, 240, 174, 0.4); 
+    background-color: #0d0d0d;
 }
 
 .card .material-icons {
     font-size: 3em;
-    color: var(--color-accent-green);
-    text-shadow: 0 0 5px var(--color-accent-green);
+    color: var(--color-accent-blue);
+    margin-bottom: 10px;
 }
 
 .card h3 {
-    color: var(--color-accent-blue);
+    color: var(--color-text);
     font-weight: 700;
-    letter-spacing: 1px;
+}
+.card p {
+    color: #999;
+    font-weight: 300;
 }
 
 /* Riflessioni e Footer */
 .reflection-box {
     padding: 40px;
-    border: 3px double var(--color-accent-blue);
-    background-color: #0d0d0d;
-    box-shadow: 0 0 10px var(--color-accent-blue);
+    border-left: 5px solid var(--color-accent-green);
+    background-color: var(--color-separator);
 }
 .reflection-box p {
     font-style: italic;
     color: #e0e0e0;
-    font-size: 1.1em;
 }
 .signature {
-    color: var(--color-accent-green) !important;
+    color: var(--color-accent-blue) !important;
     font-weight: 700;
+    margin-top: 15px;
+    display: block;
 }
 footer {
-    border-top: 1px dashed var(--color-accent-green);
+    border-top: 1px solid var(--color-separator);
+    color: #444;
+}    border-top: 1px dashed var(--color-accent-green);
     color: #444;
 }
