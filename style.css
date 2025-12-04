@@ -1,224 +1,249 @@
-/* --- VARIABILI E FONT (Minimal/Clean Look) --- */
+/* --- VARIABILI E FONT (Cyberpunk/Glitch Look) --- */
 :root {
     --color-main: #000000;             /* Nero Puro */
     --color-text: #F1F1F1;             /* Bianco Leggero */
-    --color-accent-blue: #00bcd4;      /* Azzurro Ciano (Accent) */
-    --color-accent-green: #4caf50;     /* Verde (Accent) */
-    --color-separator: #222222;        /* Linee di divisione sottili */
+    --color-accent-blue: #00e5ff;      /* Azzurro Neon Forte */
+    --color-accent-green: #64ffda;     /* Verde Ciano Neon Forte */
+    --color-separator: #222;           /* Linee di divisione */
+    --font-stack: 'Rajdhani', sans-serif;
 }
 
+/* Base e Reset */
 * {
     box-sizing: border-box;
-    transition: all 0.3s ease-out; /* Tutte le transizioni sono fluide */
+    /* Transizione rapida per effetti di hover bruschi */
+    transition: all 0.15s ease-out; 
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-stack);
     margin: 0;
     padding: 0;
     color: var(--color-text);
     background-color: var(--color-main);
     line-height: 1.6;
     overflow-x: hidden;
+    /* Filtro per un leggero effetto tremolante su tutto */
+    filter: brightness(1) contrast(1);
+    animation: background-pulse 40s linear infinite; /* Animazione lenta dello sfondo */
 }
+
+/* --- EFFETTO BACKGROUND GRANULOSO/RUMORE --- */
+#grain-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999; /* Alto ma sotto gli elementi */
+    pointer-events: none;
+    opacity: 0.05; /* Molto sottile */
+    /* Immagine pattern per il rumore (usiamo un gradiente ripetuto per simularlo) */
+    background-image: repeating-linear-gradient(
+        45deg, 
+        rgba(0,0,0,.5), 
+        rgba(0,0,0,.5) 1px, 
+        transparent 1px, 
+        transparent 2px
+    );
+    animation: grain-animation 0.5s steps(1) infinite;
+}
+
+@keyframes grain-animation {
+    0%, 100% { transform: translate(0, 0) }
+    10% { transform: translate(-1px, 1px) }
+    20% { transform: translate(-2px, 0) }
+    30% { transform: translate(1px, -1px) }
+    40% { transform: translate(0, 2px) }
+    50% { transform: translate(-1px, -2px) }
+    60% { transform: translate(-2px, 1px) }
+    70% { transform: translate(2px, 0) }
+    80% { transform: translate(-1px, 1px) }
+    90% { transform: translate(0, -1px) }
+}
+/* Animazione sfondo lenta (cambia leggermente la tinta) */
+@keyframes background-pulse {
+    0% { background-color: var(--color-main); }
+    50% { background-color: #030303; }
+    100% { background-color: var(--color-main); }
+}
+
 
 /* --- HEADER e NAVIGAZIONE --- */
 header {
-    background-color: var(--color-main);
-    padding: 18px 5%;
+    background-color: rgba(0, 0, 0, 0.95);
+    padding: 15px 5%;
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid var(--color-separator);
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1300px;
-    margin: 0 auto;
+    border-bottom: 2px dashed var(--color-accent-blue);
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
 }
 
 .logo {
-    font-size: 1.2em;
+    font-size: 1.8em;
     font-weight: 700;
-    color: var(--color-accent-blue);
-    letter-spacing: 1px;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
+    color: var(--color-accent-green);
+    letter-spacing: 3px;
+    /* Ombra neon */
+    text-shadow: 0 0 5px var(--color-accent-green); 
 }
 
 nav ul li a {
     color: var(--color-text);
-    text-decoration: none;
     padding: 10px 15px;
-    font-weight: 500;
-    opacity: 0.8;
+    font-weight: 600;
+    border: 1px solid transparent;
 }
-
 nav ul li a:hover {
-    color: var(--color-accent-green);
-    opacity: 1;
+    color: var(--color-accent-blue);
+    border: 1px solid var(--color-accent-blue);
+    box-shadow: 0 0 5px var(--color-accent-blue);
+    transform: skewX(-5deg); /* Effetto obliquo all'hover */
 }
 
-/* --- SEZIONE HERO (Minimalismo e Focus) --- */
+
+/* --- SEZIONE HERO (Il Glitch VERO) --- */
 .hero-section {
     position: relative;
     height: 90vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    overflow: hidden;
-    background: var(--color-main);
+    border-bottom: 5px double var(--color-accent-green);
 }
 
 .hero-content {
-    position: relative;
     z-index: 10;
-    max-width: 900px;
-    padding: 0 5%;
 }
 
 .pre-title {
-    color: var(--color-accent-green);
-    font-size: 0.9em;
-    letter-spacing: 3px;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    font-weight: 500;
-    opacity: 0.7;
+    color: var(--color-accent-blue);
+    font-size: 1.1em;
+    letter-spacing: 5px;
+    /* Animazione Glitch sul testo pre-title */
+    animation: text-glitch 2s infinite alternate; 
+    position: relative;
+}
+.pre-title::before, .pre-title::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.pre-title::before {
+    left: 2px;
+    text-shadow: -2px 0 var(--color-accent-green);
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim-1 2s infinite alternate-reverse;
+}
+.pre-title::after {
+    left: -2px;
+    text-shadow: -2px 0 var(--color-accent-blue);
+    clip: rect(8px, 450px, 30px, 0);
+    animation: glitch-anim-2 2s infinite alternate-reverse;
 }
 
-.hero-content h1 {
-    font-size: 4.5em; /* Più contenuto del precedente */
-    font-weight: 900;
-    margin: 0 0 10px 0;
-    color: var(--color-text);
-    line-height: 1.1;
+@keyframes glitch-anim-1 {
+    0% { clip: rect(24px, 9999px, 83px, 0) }
+    15% { clip: rect(65px, 9999px, 80px, 0) }
+    30% { clip: rect(98px, 9999px, 37px, 0) }
+    45% { clip: rect(31px, 9999px, 14px, 0) }
+    60% { clip: rect(10px, 9999px, 53px, 0) }
+    75% { clip: rect(74px, 9999px, 46px, 0) }
+    90% { clip: rect(51px, 9999px, 95px, 0) }
 }
-/* Colore diverso per l'accento */
-.hero-content h1 strong, .hero-content h1 b {
-    color: var(--color-accent-blue);
+@keyframes glitch-anim-2 {
+    0% { clip: rect(13px, 9999px, 20px, 0) }
+    15% { clip: rect(47px, 9999px, 29px, 0) }
+    30% { clip: rect(78px, 9999px, 63px, 0) }
+    45% { clip: rect(87px, 9999px, 71px, 0) }
+    60% { clip: rect(92px, 9999px, 99px, 0) }
+    75% { clip: rect(30px, 9999px, 8px, 0) }
+    90% { clip: rect(1px, 9999px, 40px, 0) }
+}
+
+
+.hero-content h1 {
+    font-size: 8em;
+    font-weight: 900;
+    text-shadow: 0 0 15px var(--color-accent-blue);
+    letter-spacing: 5px;
+    /* Testo che vibra leggermente */
+    animation: shake 0.5s infinite; 
+}
+@keyframes shake {
+    0%, 100% { transform: translate(0.5px, 0); }
+    50% { transform: translate(-0.5px, 0); }
 }
 
 .description {
-    font-size: 1.1em;
-    color: #888;
-    margin-bottom: 40px;
-    font-weight: 300;
+    color: var(--color-accent-green);
+    font-style: italic;
 }
 
 .cta-button {
-    display: inline-block;
     background-color: var(--color-accent-green);
     color: var(--color-main);
-    padding: 12px 30px;
-    text-decoration: none;
-    border-radius: 4px;
+    border: 3px solid var(--color-accent-green);
+    box-shadow: 0 0 20px var(--color-accent-green);
+    padding: 15px 40px;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
 }
 
 .cta-button:hover {
-    background-color: #66bb6a;
-    transform: translateY(-2px);
+    background-color: var(--color-main);
+    color: var(--color-accent-green);
+    transform: scale(1.05) rotateZ(1deg); /* Più aggressivo */
+    box-shadow: 0 0 30px var(--color-accent-blue);
 }
 
-/* --- GLOBO (Elemento Visivo Minimalista) --- */
+/* --- GLOBO (Aura Animata) --- */
 .spinning-globe {
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    border-radius: 50%;
-    opacity: 0.05; /* Molto sottile */
-    z-index: 5;
+    width: 700px;
+    height: 700px;
+    opacity: 0.1;
     background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e3/Worldmap-min.svg');
     background-size: 150%; 
-    background-repeat: repeat-x;
     background-color: var(--color-accent-blue);
-    background-blend-mode: luminosity; /* Rende la mappa quasi monocromatica */
-    border: 1px solid var(--color-separator);
-    animation: spin 90s linear infinite;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    background-blend-mode: color-dodge; /* Fusione che crea luci forti */
+    
+    /* Aura pulsante e rotante */
+    box-shadow: 0 0 100px 50px rgba(0, 229, 255, 0.4), 
+                0 0 20px 5px var(--color-accent-green);
+    animation: spin 60s linear infinite, glow 3s alternate infinite;
 }
 
+@keyframes glow {
+    0% { box-shadow: 0 0 80px 40px rgba(0, 229, 255, 0.4), 0 0 20px 5px var(--color-accent-green); }
+    100% { box-shadow: 0 0 120px 60px rgba(100, 255, 218, 0.5), 0 0 30px 10px var(--color-accent-blue); }
+}
 @keyframes spin {
-    from {
-        background-position: 0% 0;
-    }
-    to {
-        background-position: 100% 0;
-    }
+    from { background-position: 0% 0; }
+    to { background-position: 100% 0; }
 }
 
 
-/* --- SEZIONI DI CONTENUTO (Clean Layout) --- */
+/* --- SEZIONI DI CONTENUTO --- */
 main {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 0 5%;
 }
 
 .content-section {
-    padding: 120px 0;
-    border-bottom: 1px solid var(--color-separator);
-}
-
-.content-section:last-child {
-    border-bottom: none;
+    padding: 100px 0;
+    border-bottom: 1px dashed var(--color-separator);
 }
 
 .content-section h2 {
-    font-size: 2.5em;
-    color: var(--color-text);
-    margin-bottom: 50px;
-    font-weight: 900;
-    letter-spacing: 0.5px;
-    border-left: 5px solid var(--color-accent-blue);
-    padding-left: 15px;
-}
-
-.text-block {
-    max-width: 700px;
-}
-.text-block h3 {
+    font-size: 2.8em;
     color: var(--color-accent-green);
-    font-size: 1.4em;
     font-weight: 700;
-    margin-top: 0;
-}
-.text-block p, .text-block ul {
-    color: #b0b0b0;
-    font-weight: 300;
-}
-.text-block ul {
-    list-style: none;
-    padding-left: 0;
-}
-.text-block ul li {
-    margin-bottom: 10px;
-    position: relative;
+    text-shadow: 0 0 5px var(--color-accent-green);
+    border-left: 5px solid var(--color-accent-blue);
     padding-left: 20px;
-}
-.text-block ul li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--color-accent-blue);
-    font-weight: 900;
+    margin-bottom: 40px;
 }
 
-
-/* CARD (Stile Clean e Hover Elegante) */
+/* CARD (Glitchy Hover) */
 .card-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -226,41 +251,57 @@ main {
 }
 
 .card {
-    background-color: #0d0d0d;
+    background-color: #111111;
     border: 1px solid var(--color-separator);
-    border-radius: 8px;
+    border-radius: 2px; /* Bordi appuntiti */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     padding: 30px;
     text-align: left;
-    transition: border-color 0.3s, background-color 0.3s;
+    position: relative;
+    overflow: hidden;
 }
 
 .card:hover {
-    border-color: var(--color-accent-green);
-    background-color: #1a1a1a;
-    transform: translateY(-5px);
+    border-color: var(--color-accent-blue);
+    box-shadow: 0 0 15px var(--color-accent-blue);
+    transform: skewX(1deg) scale(1.02); /* Effetto Glitch/Shift */
+}
+
+/* Testo hover che appare in basso a destra */
+.card::after {
+    content: attr(data-hover-text);
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 0.8em;
+    color: var(--color-accent-blue);
+    opacity: 0;
+    transition: opacity 0.1s, transform 0.1s;
+    text-shadow: 1px 1px #000;
+}
+.card:hover::after {
+    opacity: 1;
+    transform: translate(-2px, -2px);
 }
 
 .card .material-icons {
-    font-size: 2.5em;
+    font-size: 3em;
     color: var(--color-accent-green);
-    margin-bottom: 15px;
+    text-shadow: 0 0 5px var(--color-accent-green);
 }
 
 .card h3 {
-    color: var(--color-text);
+    color: var(--color-accent-blue);
     font-weight: 700;
-    margin-top: 0;
-}
-.card p {
-    color: #999;
+    letter-spacing: 1px;
 }
 
 /* Riflessioni e Footer */
 .reflection-box {
     padding: 40px;
-    border: 1px solid var(--color-accent-blue);
-    border-radius: 4px;
+    border: 3px double var(--color-accent-blue);
     background-color: #0d0d0d;
+    box-shadow: 0 0 10px var(--color-accent-blue);
 }
 .reflection-box p {
     font-style: italic;
@@ -268,19 +309,10 @@ main {
     font-size: 1.1em;
 }
 .signature {
-    font-style: normal !important;
-    margin-top: 20px;
-    border-top: 1px solid var(--color-separator);
-    padding-top: 10px;
     color: var(--color-accent-green) !important;
+    font-weight: 700;
 }
-
 footer {
-    background-color: var(--color-main);
+    border-top: 1px dashed var(--color-accent-green);
     color: #444;
-    text-align: center;
-    padding: 30px 0;
-    margin-top: 50px;
-    font-size: 0.8em;
-    border-top: 1px solid var(--color-separator);
 }
