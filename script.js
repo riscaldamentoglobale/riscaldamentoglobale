@@ -16,14 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 targetElement.scrollIntoView({
                     behavior: 'smooth'
                 });
-
-                // BONUS: Se hai un menu a tendina su mobile, potresti chiuderlo qui
-                // Esempio: chiudiMobileMenu();
             }
         });
     });
-
-    // Puoi aggiungere qui altre funzionalità, ad esempio:
-    // 1. Un effetto che cambia l'opacità del globo in base allo scroll.
-    // 2. Un "Torna su" (Back to Top) button.
 });
