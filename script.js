@@ -4,15 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     anchorLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            // Impedisce il comportamento predefinito del link (salto immediato)
             e.preventDefault();
-
-            // Ottiene l'ID della sezione di destinazione (es. #introduzione)
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
 
             if (targetElement) {
-                // Scorri la pagina in modo fluido fino alla sezione
+                // Scorri la pagina in modo fluido
                 targetElement.scrollIntoView({
                     behavior: 'smooth'
                 });
