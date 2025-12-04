@@ -1,202 +1,286 @@
-/* Variabili per un cambio rapido dei colori */
+/* --- VARIABILI E RESET (High Contrast Setup) --- */
 :root {
-    --color-primary: #1e88e5; /* Blu chiaro/Azzurro */
-    --color-secondary: #4caf50; /* Verde */
-    --color-text: #333;
-    --color-light: #f4f4f4;
-    --color-dark: #1e1e1e;
+    --color-primary-blue: #00bcd4;     /* Azzurro Ciano (Neon) */
+    --color-secondary-green: #4caf50;  /* Verde Acido */
+    --color-background-deep: #0a0a0a;  /* Nero Profondo */
+    --color-text-light: #f1f1f1;       /* Testo Bianco */
+    --color-accent-dark: #1e1e1e;      /* Sfondo Card leggermente più chiaro */
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    color: var(--color-text);
-    background-color: var(--color-light);
+    color: var(--color-text-light);
+    background-color: var(--color-background-deep);
     line-height: 1.6;
+    overflow-x: hidden; /* Evita scroll orizzontale */
 }
 
-/* --- HEADER e NAVIGAZIONE --- */
+/* --- HEADER (Stile minimalista e definito) --- */
 header {
-    background-color: var(--color-dark);
-    color: white;
-    padding: 15px 50px;
+    background-color: rgba(0, 0, 0, 0.9); /* Leggera trasparenza */
+    padding: 15px 5%;
     position: sticky;
     top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-bottom: 2px solid var(--color-primary-blue);
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .logo {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: var(--color-secondary);
+    font-size: 1.6em;
+    font-weight: 900;
+    color: var(--color-secondary-green);
+    letter-spacing: 2px;
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    margin: 0;
-    padding: 0;
 }
 
 nav ul li a {
-    color: white;
+    color: var(--color-text-light);
     text-decoration: none;
-    padding: 10px 15px;
-    transition: color 0.3s;
+    padding: 10px 18px;
+    transition: color 0.3s, background-color 0.3s;
+    font-weight: 700;
+    position: relative;
 }
 
 nav ul li a:hover {
-    color: var(--color-primary);
+    color: var(--color-primary-blue);
+}
+/* Linea animata al passaggio del mouse sotto il link */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background-color: var(--color-primary-blue);
+    transition: width 0.3s ease-out, left 0.3s ease-out;
+}
+nav ul li a:hover::after {
+    width: 100%;
+    left: 0;
 }
 
-/* --- SEZIONE HERO (Il colpo d'occhio) --- */
+/* --- SEZIONE HERO (L'effetto WOW) --- */
 .hero-section {
     position: relative;
-    height: 80vh; /* 80% dell'altezza dello schermo */
+    height: 95vh;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    overflow: hidden; /* Importante per contenere il globo */
-    background: linear-gradient(135deg, var(--color-primary), #0d47a1); /* Sfumatura azzurra */
-    color: white;
+    overflow: hidden;
+    background: radial-gradient(circle at center, #111111 0%, var(--color-background-deep) 100%);
+    border-bottom: 5px solid var(--color-secondary-green);
 }
 
 .hero-content {
     position: relative;
-    z-index: 10; /* Assicura che il testo sia sopra il globo */
+    z-index: 10;
     padding: 20px;
+    max-width: 900px;
 }
 
 .hero-content h1 {
-    font-size: 4em;
-    margin-bottom: 0.1em;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    font-size: 7em; /* Titolo gigante */
+    font-weight: 900;
+    margin: 0.05em 0;
+    /* Effetto Neon Blue */
+    color: white; 
+    text-shadow: 
+        0 0 10px var(--color-primary-blue),
+        0 0 20px var(--color-primary-blue),
+        0 0 40px var(--color-primary-blue);
+    letter-spacing: -1px;
+    line-height: 1;
 }
 
 .hero-content p {
-    font-size: 1.5em;
-    margin-bottom: 2em;
+    font-size: 1.4em;
+    font-weight: 300;
+    color: #cccccc;
+    margin-top: 10px;
 }
 
 .cta-button {
+    /* Stile Button: Aggressivo e Visibile */
     display: inline-block;
-    background-color: var(--color-secondary);
-    color: white;
-    padding: 15px 30px;
+    background: linear-gradient(45deg, var(--color-secondary-green), #81c784);
+    color: var(--color-background-deep);
+    padding: 15px 35px;
     text-decoration: none;
     border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s, transform 0.3s;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: none;
+    box-shadow: 0 0 15px var(--color-secondary-green);
+    margin-top: 30px;
 }
 
 .cta-button:hover {
-    background-color: #388e3c; /* Verde più scuro al passaggio del mouse */
     transform: scale(1.05);
+    box-shadow: 0 0 25px var(--color-secondary-green);
 }
 
-/* --- GLOBO CHE GIRA (L'effetto WOW) --- */
+/* --- GLOBO CHE GIRA (Potenziato e Sfondo) --- */
 .spinning-globe {
     position: absolute;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle at center, #64b5f6, #0d47a1); /* Sfera blu tridimensionale */
+    width: 1000px; /* Molto grande */
+    height: 1000px;
+    background: transparent; /* Nascondiamo il background originale */
     border-radius: 50%;
-    opacity: 0.3; /* Leggermente trasparente per non coprire il testo */
+    opacity: 0.1; 
     z-index: 5;
-    /* Immagine di sfondo per simulare la mappa terrestre */
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e3/Worldmap-min.svg'); /* Sostituisci con una vera immagine del globo se vuoi! */
-    background-size: cover;
-    animation: spin 30s linear infinite; /* Applico l'animazione */
+    animation: spin 90s linear infinite; /* Animazione più lenta ed epica */
 }
 
-/* Animazione di rotazione */
+/* Creo l'illusione del globo ruotante usando un pseudo-elemento con la mappa */
+.spinning-globe::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e3/Worldmap-min.svg');
+    background-size: 200%; /* Ingandisco la mappa */
+    background-repeat: repeat-x;
+    opacity: 0.5;
+    /* Colore che si fonde con il tema */
+    background-color: var(--color-primary-blue);
+    background-blend-mode: color-burn; 
+    
+    /* Effetto alone (Glow) */
+    box-shadow: 0 0 100px 50px rgba(0, 188, 212, 0.2); 
+}
+
 @keyframes spin {
     from {
+        /* Sposto l'immagine del background per l'effetto rotazione */
+        background-position: 0% 0;
         transform: rotate(0deg);
     }
     to {
+        background-position: 100% 0;
         transform: rotate(360deg);
     }
 }
 
-/* Posizionamento del globo */
-.hero-section::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 600px;
-    height: 600px;
-    border-radius: 50%;
-    box-shadow: 0 0 100px 50px rgba(255, 255, 255, 0.2); /* Effetto alone luminoso */
-    z-index: 4;
+
+/* --- SEZIONI DI CONTENUTO (Layout a Griglia) --- */
+main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 5%;
 }
 
-
-/* --- SEZIONI DI CONTENUTO --- */
 .content-section {
-    padding: 60px 10%;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 100px 0;
+    border-bottom: 1px dashed var(--color-accent-dark);
 }
 
 .content-section h2 {
-    color: var(--color-primary);
-    border-bottom: 3px solid var(--color-secondary);
-    padding-bottom: 10px;
-    margin-bottom: 30px;
+    font-size: 3em;
+    color: var(--color-secondary-green);
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    font-weight: 900;
+    position: relative;
+}
+/* Aggiunge una linea decorativa sotto il titolo */
+.content-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 80px;
+    height: 4px;
+    background-color: var(--color-primary-blue);
+    border-radius: 2px;
 }
 
-/* CARD per le cause */
+/* Griglia per le Card */
 .card-container {
-    display: flex;
-    gap: 30px;
-    flex-wrap: wrap;
-    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Layout responsivo */
+    gap: 40px;
 }
 
 .card {
-    background-color: white;
+    background-color: var(--color-accent-dark);
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--color-background-deep);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     padding: 30px;
-    flex: 1;
-    min-width: 250px;
-    transition: transform 0.3s;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
     text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
+/* Effetto Bordo Glitch all'hover */
 .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 0 25px rgba(0, 188, 212, 0.6); /* Ombra Blu Intensa */
+    border-color: var(--color-primary-blue);
 }
 
 .card .material-icons {
-    font-size: 3em;
-    color: var(--color-secondary);
+    font-size: 4em;
+    color: var(--color-secondary-green);
     margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(67, 160, 71, 0.8);
 }
 
 .card h3 {
-    color: var(--color-primary);
-    margin-top: 0;
+    color: var(--color-primary-blue);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.card p {
+    color: #bdbdbd;
 }
 
+/* Stile specifico per le Riflessioni */
+.reflection-box {
+    background-color: var(--color-accent-dark);
+    padding: 40px;
+    border-left: 5px solid var(--color-primary-blue);
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0, 188, 212, 0.2);
+}
+.reflection-box p {
+    font-style: italic;
+    color: #e0e0e0;
+    font-size: 1.1em;
+}
 /* --- FOOTER --- */
 footer {
-    background-color: var(--color-dark);
-    color: white;
+    background-color: #000;
+    color: #666;
     text-align: center;
-    padding: 20px 0;
+    padding: 30px 0;
     margin-top: 50px;
+    font-size: 0.9em;
+    border-top: 1px solid var(--color-accent-dark);
 }
